@@ -33,18 +33,13 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     client.emit('deliveryConfirmation', { messageId: payload.message });
   }
 
-  // @SubscribeMessage('typing')
-  // async handleTyping(client: Socket, payload: { user: string }) {
-  //   this.server.emit('typing', `${client.id} - ${payload.user}...`);
-  // }
+  @SubscribeMessage('typing')
+  async handleTyping(client: Socket) {
+    this.server.emit('typing', `${client.id} - typing...`);
+  }
 
-  // @SubscribeMessage('stopTyping')
-  // async handleStopTyping(client: Socket, payload: { user: string }) {
-  //   this.server.emit('stopTyping', `${client.id} - ${payload.user}...`);
-  // }
-
-  // @SubscribeMessage('message-read')
-  // async handleDelievery() {
-  //   this.server.emit('delivered', 'Message viewed');
-  // }
+  @SubscribeMessage('stopTyping')
+  async handleStopTyping(client: Socket) {
+    this.server.emit('stopTyping', `${client.id} - typing...`);
+  }
 }
